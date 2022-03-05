@@ -4,13 +4,12 @@
   </div>
 </template>
 
-<script>
-
+<script lang="ts">
 export default {
   name: "Money.vue",
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
