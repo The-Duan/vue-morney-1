@@ -9,13 +9,15 @@
 </template>
 
 <script lang="ts">
+import x from '@/assets/icons/label.svg';
+
 export default {
-  name: "Nav.vue"
-}
+  name: 'Nav.vue'
+};
 </script>
 
 <style lang="scss" scoped>
-.nav{
+.nav {
 
 }
 </style>
