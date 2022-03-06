@@ -1,43 +1,28 @@
 <template>
-  <div>
+  <div id="app">
     <router-view/>
-    <Nav/>
   </div>
 </template>
 
+<script lang="ts">
+
+  import Vue from 'vue';
+  import {Component} from 'vue-property-decorator';
+
+  @Component
+  export default class App extends Vue {
+
+    beforeCreate() {
+      this.$store.commit('fetchRecords');
+      this.$store.commit('fetchTags');
+    }
+  }
+</script>
 <style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  @import "~@/assets/style/index.scss";
 
-body {
-  line-height: 1.5;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-//#app {
-//  font-family: Avenir, Helvetica, Arial, sans-serif;
-//  -webkit-font-smoothing: antialiased;
-//  -moz-osx-font-smoothing: grayscale;
-//  text-align: center;
-//  color: #2c3e50;
-//}
-
-//
-//nav {
-//  padding: 15px;
-//  a {
-//    font-weight: bold;
-//    color: #2c3e50;
-//    &.router-link-exact-active {
-//      color: #63b17b;
-//    }
-//  }
-//}
+  #app {
+    max-width: 520px;
+    margin: 0 auto;
+  }
 </style>

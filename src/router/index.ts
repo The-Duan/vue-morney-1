@@ -1,50 +1,84 @@
 import Vue from 'vue';
 import VueRouter, {RouteConfig} from 'vue-router';
-import Money from '@/views/Money.vue';
-import Labels from '@/views/Labels.vue';
-import Statistics from '@/views/Statistics.vue';
-import NotFound from '@/views/NotFound.vue'
+import Home from '@/views/Home/Home.vue';
+import Detail from '@/views/Detail/Detail.vue';
+import Statistics from '@/views/Statistics/Statistics.vue';
+import NoMatch from '@/views/NoMatch/NoMatch.vue';
+import Money from '@/views/Home/childComps/Money/Money.vue';
+import Edit from '@/views/Home/childComps/Edit/Edit.vue';
+import EditTag from '@/views/Home/childComps/Edit/EditTag.vue';
+import OverviewChart from '@/views/Statistics/childComps/OverviewChart.vue';
+import ExpensesChart from '@/views/Statistics/childComps/ExpensesChart.vue';
+import IncomeChart from '@/views/Statistics/childComps/IncomeChart.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
-    {
-        path: '/',
-        redirect: '/money',
-    },
-    {
-        path: '/money',
+  {
+    path: '/',
+    redirect: '/home',
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home,
+    children: [
+      {
+        path: 'money',
         component: Money,
-    },
-    {
-        path: '/labels',
-        component: Labels,
-    },
-    {
+        children: [
+          {
+            path: 'edit',
+            component: Edit,
+            children:[
+              {
+                path:':id',
+                component:EditTag
+              }
+            ]
+          }
+        ]
+      },
+    ]
+  },
+  {
+    path: '/detail',
+    name: 'Detail',
+    component: Detail
+  },
+  {
+    path: '/statistics',
+    name: 'Statistics',
+    component: Statistics,
+    children:[
+      {
+        path:'overview',
+        component:OverviewChart
+      },
+      {
+        path:'expenses',
+        component: ExpensesChart
+      },
+      {
+        path:'income',
+        component: IncomeChart
+      },
+      {
         path: '/statistics',
-        component: Statistics,
-    },
-    {
-        path:'*',
-        component:NotFound
-    }
-    // {
-    //     path: '/',
-    //     name: 'home',
-    //     component: HomeView
-    // },
-    // {
-    //     path: '/about',
-    //     name: 'about',
-    //     // route level code-splitting
-    //     // this generates a separate chunk (about.[hash].js) for this route
-    //     // which is lazy-loaded when the route is visited.
-    //     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-    // }
+        redirect: '/statistics/overview',
+      },
+    ]
+  },
+  {
+    path: '*',
+    name: 'NoMatch',
+    component: NoMatch
+  }
 ];
 
 const router = new VueRouter({
-    routes
+  routes,
+  mode: 'hash'
 });
 
 export default router;
