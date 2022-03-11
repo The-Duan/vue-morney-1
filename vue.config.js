@@ -3,7 +3,7 @@ const Plugin = require('svg-sprite-loader/plugin')
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/vue-morney-1/'
+    ? '/vue-morney-website/'
     : '/',
   lintOnSave: false,
   chainWebpack: config => {
