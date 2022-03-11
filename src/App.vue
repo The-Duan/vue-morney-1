@@ -11,7 +11,6 @@
 
   @Component
   export default class App extends Vue {
-
     beforeCreate() {
       this.$store.commit('fetchRecords');
       this.$store.commit('fetchTags');
